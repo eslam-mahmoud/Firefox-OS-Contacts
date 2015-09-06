@@ -7,7 +7,7 @@ $(document).ready(function(){
       $('#contact img').attr('src', "http://www.gravatar.com/avatar/"+md5($(this).val())+"?s=200");
   });
   
-  $('#save').on('click', function(event){
+  $('#save, #save_no_img').on('click', function(event){
     //Stop form submittion
     event.preventDefault();
     
@@ -22,6 +22,10 @@ $(document).ready(function(){
       email: email,
       imgURL: imgURL
     };
+    
+    if ($(this).attr('id') == 'save_no_img') {
+      data.imgURL = null;
+    }
     
     saveContact(data);
   });
@@ -38,29 +42,33 @@ function saveContact(data, blob){
   person.email = [];
   person.email[0]  = {type:['work'], value:data.email};
   
-  var oReq = new XMLHttpRequest();
-  console.log(oReq);
-  oReq.onload = function (e) {
-    console.log(0, person);
-    console.log(this.response);
-    var arrayBufferView = new Uint8Array(this.response);
-    person.photo  = [];
-    person.photo[0] = new Blob([arrayBufferView], {type: 'image/png'});
-    console.log(1, person);
-    savePerson(person)
-  };
-  
-  oReq.onerror = function (e) {
-    alert('Error could not get your contact image');
-    $('#save.no_img').show();
-  }
+  if (data.imgURL) {
+    var oReq = new XMLHttpRequest();
+//     console.log(oReq);
+    oReq.onload = function (e) {
+//       console.log(0, person);
+//       console.log(this.response);
+      var arrayBufferView = new Uint8Array(this.response);
+      person.photo  = [];
+      person.photo[0] = new Blob([arrayBufferView], {type: 'image/png'});
+//       console.log(1, person);
+      savePerson(person)
+    };
 
-  oReq.open("GET", data.imgURL, true);
-  oReq.responseType = "arraybuffer";
-  oReq.send();
+    oReq.onerror = function (e) {
+      alert('Error could not get your contact image');
+      $('#save_no_img').attr('style','display:table');
+    }
+
+    oReq.open("GET", data.imgURL, true);
+    oReq.responseType = "arraybuffer";
+    oReq.send();
+  } else {
+    savePerson(person)
+  }
   
   
-  console.log(2, person);
+//   console.log(2, person);
 }
 
 function savePerson(person) {
@@ -69,12 +77,15 @@ function savePerson(person) {
 
   saving.onsuccess = function() {
     alert('New contact saved');
-    // This update the person as it is stored
-    // It includes its internal unique ID
-    // Note that saving.result is null here
+    init();
   };
 
   saving.onerror = function(err) {
     alert('Error: ' + err);
   };
+}
+
+function init() {
+  $('#contact input').val(null);
+  $('#save_no_img').hide();
 }
