@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "name": "Contact++",
+  "description": "A smart way to add face to your contact",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/icon16x16.png",
+    "48": "/img/icons/icon48x48.png",
+    "60": "/img/icons/icon60x60.png",
+    "128": "/img/icons/icon128x128.png"
+  },
+  "developer": {
+    "name": "Eslam Mahmoud",
+    "url": "http://eslam.me"
+  },
+  "type": "privileged",
+  "permissions": {
+    "contacts": {
+      "access": "readcreate",
+      "description": "Needed for creating new contact."
+    },
+    "systemXHR": {
+      "description": "Needed for saving contact image."
+    }
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "locales": {
+    "es": {
+      "name": "Aplicación vacía privilegiada",
+      "description": "Una plantilla con la mínima estructura",
+      "permissions": {}
+    }
+  },
+  "default_locale": "en"
+}
