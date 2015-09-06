@@ -1,12 +1,30 @@
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+
 $(document).ready(function(){  
   if (md5('hello') != '5d41402abc4b2a76b9719d911017c592') {
     alert('There is a problem, please contact us at contact@eslam.me');
   }
   
+  //Open all external links in the browser
+  $('a[href^=http]').click(function(e){
+      e.preventDefault();
+      var activity = new MozActivity({
+        name: "view",
+        data: {
+          type: "url",
+          url: $(this).attr("href")  
+        }
+      });
+   });
+  
+  //Get the image of the email from gravatar
   $('#email').on('input', function() {
       $('#contact img').attr('src', "http://www.gravatar.com/avatar/"+md5($(this).val())+"?s=200&d=monsterid");
   });
   
+  //Button clicked
   $('#save, #save_no_img').on('click', function(event){
     //Stop form submittion
     event.preventDefault();
@@ -28,10 +46,12 @@ $(document).ready(function(){
       imgURL: imgURL
     };
     
+    //Remove the image if could not download it
     if ($(this).attr('id') == 'save_no_img') {
       data.imgURL = null;
     }
     
+    //Save the data
     saveContact(data);
   });
 });
@@ -47,19 +67,18 @@ function saveContact(data, blob){
   person.email = [];
   person.email[0]  = {type:['work'], value:data.email};
   
+  //If there image try to download it then save the contact
   if (data.imgURL) {
     var oReq = new XMLHttpRequest();
-//     console.log(oReq);
     oReq.onload = function (e) {
-//       console.log(0, person);
-//       console.log(this.response);
       var arrayBufferView = new Uint8Array(this.response);
       person.photo  = [];
       person.photo[0] = new Blob([arrayBufferView], {type: 'image/png'});
-//       console.log(1, person);
-      savePerson(person)
+      //Save the contact to contacts list
+      savePerson(person);
     };
 
+    //IF there was error loading the image display the other button for download
     oReq.onerror = function (e) {
       alert('Error could not get your contact image');
       $('#save_no_img').attr('style','display:table');
@@ -71,20 +90,20 @@ function saveContact(data, blob){
   } else {
     savePerson(person)
   }
-  
-  
-//   console.log(2, person);
 }
 
+//Save the contact into contact list
 function savePerson(person) {
   // save the new contact
   var saving = navigator.mozContacts.save(person);
 
+  //Alert the user if the contact saved
   saving.onsuccess = function() {
     alert('New contact saved');
     init();
   };
 
+  //Get if there was error and display the message
   saving.onerror = function(err) {
     console.log(err.target.error);
     if (err.target.error.message) {
@@ -97,6 +116,7 @@ function savePerson(person) {
   };
 }
 
+//Reset the app after saving
 function init() {
   $('#contact input').val(null);
   $('#save_no_img').hide();
