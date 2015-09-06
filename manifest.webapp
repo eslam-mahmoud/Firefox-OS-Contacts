@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
-  "name": "Contact++",
-  "description": "A smart way to add face to your contact",
+  "name": "Contacts++",
+  "description": "A smarter way to add face to your contacts",
   "launch_path": "/index.html",
   "icons": {
     "16": "/img/icons/icon16x16.png",
