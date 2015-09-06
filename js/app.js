@@ -16,6 +16,11 @@ $(document).ready(function(){
     var email = $('#email').val();
     var imgURL = $('#contact img').attr('src');
     
+    if (!name || !phone) {
+      alert('Name & Phone are required');
+      return;
+    }
+    
     var data = {
       name: name,
       phone: phone,
@@ -95,4 +100,5 @@ function savePerson(person) {
 function init() {
   $('#contact input').val(null);
   $('#save_no_img').hide();
+  $('#contact img').attr('src', '/img/face.jpg');
 }
