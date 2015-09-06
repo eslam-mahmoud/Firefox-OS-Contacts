@@ -81,7 +81,14 @@ function savePerson(person) {
   };
 
   saving.onerror = function(err) {
-    alert('Error: ' + err);
+    console.log(err.target.error);
+    if (err.target.error.message) {
+     alert('Error: ' + err.target.error.message);
+    } else if (err.target.error.name == 'PERMISSION_DENIED') {
+     alert('Error: We need your permission to add new contact, please allow the app to add contacts');
+    } else {
+      alert('Error, Please contact us at contact@eslam.me');
+    }
   };
 }
 
