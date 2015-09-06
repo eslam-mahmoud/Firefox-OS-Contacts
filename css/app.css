@@ -24,3 +24,7 @@ form {
   margin: 5px auto 0 auto;
   width: 85px;
 }
+
+#save.no_img {
+  display: none;
+}
