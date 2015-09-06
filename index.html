@@ -16,21 +16,39 @@
         <script type="text/javascript" src="js/app.js" defer></script>
     </head>
     <body>
-        <section>
-            <h1 id="app_title">Contact++</h1>
-            <p id="app_description">Add new contact the smart way</p>
-        </section>
-        <section>
-            <form id="contact">
-                <center>
-                   <img src="http://www.gravatar.com/avatar/6278db4c91c6c2d91f1c7201d8e2f56?s=200" />
-                </center>
-                <input type="text" id="name" name="name" data-clear-btn="true" placeholder="Name"/>
-                <input type="text" id="phone" name="phone" data-clear-btn="true" placeholder="Phone"/>
-                <input type="email" id="email" name="email" data-clear-btn="true" placeholder="Email"/>
-                <button id="save_no_img">Save without image</button>
-                <button id="save">Save</button>
-            </form>
-        </section>
+        <div data-role="page" id="main">
+            <section id="header">
+                <h1 id="app_title">Contact++</h1>
+                <p id="app_description">Add new contact the smart way</p>
+            </section>
+            <section id="content">
+                <form id="contact">
+                    <center>
+                       <img src="/img/face.jpg" />
+                    </center>
+                    <input type="text" id="name" name="name" data-clear-btn="true" placeholder="Name"/>
+                    <input type="text" id="phone" name="phone" data-clear-btn="true" placeholder="Phone"/>
+                    <input type="email" id="email" name="email" data-clear-btn="true" placeholder="Email"/>
+                    <button id="save_no_img">Save without image</button>
+                    <button id="save">Save</button>
+                </form>
+            </section>
+            <section data-role="footer" id="nav">
+                <a href="#about">About</a>
+            </section>
+        </div>
+        <div data-role="page" id="about">
+            <section id="header">
+                <h1 id="app_title">Contact++</h1>
+                <p id="app_description">Add new contact the smart way</p>
+            </section>
+            <section id="about_body">
+                <p>This App Contact++ is here to help you add new contact in a smarter way, we all need to add face/image to the contact details we have the app get the image automatically by the email from public data available online in gravatar.com Database.</p>
+                <p>App developed with love in Egypt By <a href="http://eslam.me">Eslam Mahmoud</a> Mozilla representative, you can contact me directly on contact@eslam.me</p>
+            </section>
+            <section data-role="footer" id="nav">
+                <a href="#main">Add contact</a>
+            </section>
+        </div>
     </body>
 </html>

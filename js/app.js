@@ -4,7 +4,7 @@ $(document).ready(function(){
   }
   
   $('#email').on('input', function() {
-      $('#contact img').attr('src', "http://www.gravatar.com/avatar/"+md5($(this).val())+"?s=200");
+      $('#contact img').attr('src', "http://www.gravatar.com/avatar/"+md5($(this).val())+"?s=200&d=monsterid");
   });
   
   $('#save, #save_no_img').on('click', function(event){

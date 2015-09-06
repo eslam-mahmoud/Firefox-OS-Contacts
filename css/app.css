@@ -16,6 +16,10 @@ p {
   font-size: inherit;
 }
 
+#header {
+  margin: 0px 5px;
+}
+
 form {
   margin: 0 10px;
 }
@@ -28,4 +32,13 @@ form {
 #save_no_img {
   display: none;
   width: 190px;
+}
+
+#nav {
+  bottom: 0px;
+  margin: 5px;
+}
+
+#about_body {
+  margin: 0 10px;
 }
